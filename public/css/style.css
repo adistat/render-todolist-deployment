@@ -38,7 +38,7 @@ h1{
     flex-direction: column;
     margin-top: 8px;
     align-items: center;  
-    text-align: left;    
+    text-align: center;    
 } 
 
 .item:last-child{
