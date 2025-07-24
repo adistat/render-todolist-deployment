@@ -85,5 +85,5 @@ app.delete("/delete/:id", async function(req, res) {
 });
 
 app.listen(3000,function(){
-    console.log("server is running");
+    console.log("server is running on port 3000");
 });
