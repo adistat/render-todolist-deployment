@@ -31,15 +31,16 @@
       </div>   
 
 <!-- add task through that -->
-        <form action="/add" method="POST" class="form-container">
-        <input type="text" id="taskInput" name="ele1" placeholder="Enter the task" required>
-        <select name="priority" aria-placeholder="Low">
-        <option value="Urgent">Urgent</option>
-        <option value="High">High</option>
-        <option value="Low">Low</option>
-        </select>
-        <button  id="btn" type="submit">+</button>
-        </form>
+    <form id="taskForm" action="/add" method="POST" class="form-container">
+    <input type="text" id="taskInput" name="ele1" placeholder="Enter the task" required>
+    <select name="priority" id="prioritySelect" required>
+    <option value="" disabled selected>Priority</option>
+    <option value="Urgent">Urgent</option>
+    <option value="High">High</option>
+    <option value="Low">Low</option>
+    </select>
+    <button id="btn" type="submit">+</button>
+    </form>
 
     <footer>
     <div class="container">
@@ -62,18 +63,20 @@
       });
     });
 
-    const btn = document.getElementById("btn");
-    btn.onclick = function () {
-      const p = document.getElementById("taskInput").value;
-      if (p===""){
-        alert("Field is Empty");
-      }
-      else{
-        alert(p+" Task added");
-      }
-    };
+  const form = document.getElementById("taskForm");
+  form.addEventListener("submit", function (e) {
+  const taskInput = document.getElementById("taskInput").value.trim();
+  const priority = document.getElementById("prioritySelect").value;
+
+    if (taskInput === "" || priority === "") {
+    alert("All fields are required!");
+    e.preventDefault(); // Prevent form submission
+    return;
+    }
+    alert(taskInput + " Task added");
+    });
     
-function editTask(id, currentName, currentPriority) {
+  function editTask(id, currentName, currentPriority) {
   const newName = prompt("Edit task name:", currentName);
   if (!newName || newName.trim() === "") return;
 
