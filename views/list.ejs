@@ -9,11 +9,14 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
+  <!-- heading of todo -->
     <header>
     <div class="box">
         <h1 id="heading">Todo list</h1>
     </div> 
     </header>
+
+    <!-- this is a filer division -->
     <div style="text-align: center; margin: 20px;">
     <input type="text" id="filterInput" placeholder="Filter..." />
     </div>
@@ -21,35 +24,50 @@
     <!-- these are tasks -->
         <div class="box">
           <% ejes.forEach(function(item) { %>
-            <div class="item">
-             <p name="tsk" ><%= item.name %></p>
-            <p class="priority "><%= item.priority %></p>
-            <button class="icon-button" onclick="editTask('<%= item._id %>', '<%= item.name %>', '<%= item.priority %>')"><ion-icon name="pencil-outline"></ion-icon></button>
-            <button type="submit"><ion-icon name="trash-outline" style="cursor:pointer; margin-left: 10px;" onclick="deleteTask('<%= item._id %>')"></ion-icon></button>
+          <div class="item">
+            <div class="txt">
+            <p id="nm" name="tsk" ><%= item.name %></p>            </div>
+            <p class="priority" ><%= item.priority %></p>     
+            <button id="dl" class="icon-button" onclick="edttsk('<%= item._id %>', '<%= item.name %>', '<%= item.priority %>')"><ion-icon name="pencil-outline"></ion-icon></button>
+            <button id="sb" type="submit"><ion-icon name="trash-outline" style="cursor:pointer; margin-left: 10px;" onclick="dlttsk('<%= item._id %>')"></ion-icon></button>
           </div>
           <% }) %>   
-      </div>   
+       </div>   
 
 <!-- add task through that -->
-    <form id="taskForm" action="/add" method="POST" class="form-container">
-    <input type="text" id="taskInput" name="ele1" placeholder="Enter the task" required>
-    <select name="priority" id="prioritySelect" required>
-    <option value="" disabled selected>Priority</option>
+<form id="taskform" action="/add" method="POST" class="form-container">
+  <input type="text" id="taskInput" name="ele1" placeholder="Enter the task" required>
+             <select name="priority" id="prioritySelect" required>
+       <option value="" disabled selected>Priority</option>
     <option value="Urgent">Urgent</option>
     <option value="High">High</option>
     <option value="Low">Low</option>
-    </select>
-    <button id="btn" type="submit">+</button>
-    </form>
+  </select>
+  <button id="btn" type="submit">+</button>
+</form>
+
+
+
+
 
     <footer>
     <div class="container">
-      <p style="color: #fff;">When you complete your Task you are near to achieve your Goal.</p>
+      <p style="color: #fff; text-align: center;">When you complete your Task you are near to achieve your Goal.</p>
     </div>
+
+
+
+
+
+
+
      </footer> 
 
      <!-- Filter script  -->
    <script>
+
+
+
     document.getElementById("filterInput").addEventListener("input", function () {
       const filterValue = this.value.toLowerCase();
       const items = document.querySelectorAll(".item");
@@ -63,20 +81,38 @@
       });
     });
 
-  const form = document.getElementById("taskForm");
+    // const btn = document.getElementById("btn");
+    // btn.onclick = function () {
+    //   const p = document.getElementById("taskInput").value;
+    //   if (p===""){
+    //     alert("Field is Empty");
+    //   }
+    //   else{
+    //     alert(p+" Task added");
+    //   }
+    // };
+  const form = document.getElementById("taskform");
+
+
+
+
+
+
+  
   form.addEventListener("submit", function (e) {
   const taskInput = document.getElementById("taskInput").value.trim();
   const priority = document.getElementById("prioritySelect").value;
 
-    if (taskInput === "" || priority === "") {
+  if (taskInput === "" || priority === "") {
     alert("All fields are required!");
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault(); 
     return;
-    }
-    alert(taskInput + " Task added");
-    });
-    
-  function editTask(id, currentName, currentPriority) {
+  }
+
+  alert(taskInput + " Task added");
+  });
+
+function edttsk(id, currentName, currentPriority) {
   const newName = prompt("Edit task name:", currentName);
   if (!newName || newName.trim() === "") return;
 
@@ -99,6 +135,12 @@
   nameInput.value = newName;
   form.appendChild(nameInput);
 
+
+
+
+
+
+
   const priorityInput = document.createElement("input");
   priorityInput.type = "hidden";
   priorityInput.name = "priority";
@@ -109,11 +151,11 @@
   form.submit();
 }
 
-function deleteTask(taskId) {
+function dlttsk(tskid) {
   if (confirm("Are you sure you want to delete this task?")) {
     const form = document.createElement("form");
     form.method = "POST";
-    form.action = '/delete/'+ taskId +'?_method=DELETE';
+    form.action = '/delete/'+ tskid +'?_method=DELETE';
     document.body.appendChild(form);
     form.submit();
   }
