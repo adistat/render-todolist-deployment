@@ -12,7 +12,7 @@ h1{
 
 .box{
     max-width: 400px;
-    margin: 50px auto;
+    margin: 40px auto;
     background:white;
     text-align: center;
     border-radius: 5px;
@@ -26,12 +26,13 @@ h1{
 }
 
 .item{
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
+    justify-content: end;
     align-items: center; 
     border-bottom: 1px solid #F1F1F1;
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .itm{display: flex;
@@ -64,7 +65,7 @@ p{
     font-size: 20px;
     font-weight: 300;
     color: black;
-    text-align: center;
+    text-align: left;
 }
 
 form{
@@ -86,7 +87,7 @@ button{
 
 input[type="text"]{
     text-align: center;
-    height: 60px;
+    height: 50px;
     top: 10px;
     border: none;
     background: transparent;
@@ -98,11 +99,17 @@ input[type="text"]{
 input[type="text"]:focus{
     outline:none;
     box-shadow: inset 0 -3px 0 0 yellow;
-    color: whitesmoke;
+    /* color: #fff; */
+    background-color: #F1F1F1;
+    border-radius: 5px;
+}
+input[type="text"]{
+    color: #000;
+    background-color: #F1F1F1;
 }
 
 ::placeholder{
-    color: white;
+    color: black;
     opacity:1;
 }
 
@@ -111,6 +118,11 @@ footer{
     background-color: rgba(0,0,0,0.5);
     text-align: center;
     padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: 5px;
+    text-align: center;
 }
 
 .form-container {
@@ -122,15 +134,16 @@ footer{
 }
 
 #filterInput {
-  width: 300px;
-  height: 40px;
-  font-size: 16px;
+  width: 350px;
+  height: 50px;
+  font-size: 20px;
   padding: 5px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid yellow;
   border-radius: 5px;
   outline: none;
   text-align: center;
-  color: #F1F1F1;
+  color: #000;
+  background-color: #fff;
 }
 
 .priority {
@@ -151,3 +164,17 @@ ion-icon[name="pencil-outline"]:hover {
     background-color: #e9e108;
     color: #fff;
 }
+#prioritySelect{
+    padding: 10px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 250;
+}
+#taskForm{
+    margin-bottom: 10px;
+}
+.txt{
+    flex: 1;
+    text-align: left;
+}
+
