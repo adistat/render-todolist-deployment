@@ -10,8 +10,8 @@ app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(express.json());
 app.use((err, req, res, next) => {
-  console.error("💥 Uncaught error:", err.stack);
-  res.status(500).send("Something broke: " + err.message);
+  console.error("   uncaught error:", err.stack);
+  res.status(500).send(" something broke: " + err.message);
 });
 
 const mongoose = require("mongoose");
@@ -43,6 +43,8 @@ app.get("/",async function(req,res){
         console.log(err);
         res.status(500).send("internal error");
     }
+
+  
 });
 
 app.post("/add", async function(req, res) {
@@ -52,8 +54,8 @@ app.post("/add", async function(req, res) {
      await newItem.save();
     res.redirect("/");
   } catch (error) {
-    console.error("Error saving item:", error);
-    res.status(500).send("Internal Server Error");
+    console.error("error saving item:", error);
+    res.status(500).send("internal Server Error");
   }
 });
 
@@ -64,8 +66,8 @@ app.put("/edit/:id", async (req, res) => {
     await item.findByIdAndUpdate(id, { name, priority });
     res.redirect("/");
   } catch (err) {
-    console.error("Edit error:", err);
-    res.status(500).send("Failed to edit item.");
+    console.error("edit error:", err);
+    res.status(500).send("failed to edit item.");
   }
 });
 
@@ -79,10 +81,12 @@ app.delete("/delete/:id", async function(req, res) {
    }
     res.redirect("/");
   } catch (err) {
-    console.error("Error deleting item:", err);
-    res.status(500).send("Error deleting item.");
+    console.error("error deleting item:", err);
+    res.status(500).send("error deleting item.");
   }
 });
+
+
 
 app.listen(3000,function(){
     console.log("server is running on port 3000");
